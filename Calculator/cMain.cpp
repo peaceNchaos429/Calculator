@@ -9,6 +9,7 @@ wxEND_EVENT_TABLE()
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(30, 30), wxSize(300, 500))
 {
+	CalculatorProcessor* calcProc = CalculatorProcessor::GetInstance();
 
 	wxButton** btns;
 	BtnFactory factory;
