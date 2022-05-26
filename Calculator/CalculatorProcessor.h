@@ -50,7 +50,6 @@ public:
 	int ModC(int num1, int num2);
 	std::string decimal(int num);
 	std::string decimalToBin(int num);
-	std::string BinaryToDecimal(int input);
 
 };
 

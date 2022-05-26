@@ -50,20 +50,5 @@ std::string CalculatorProcessor::decimalToBin(int num)
 
 	return "0";
 }
-std::string CalculatorProcessor::BinaryToDecimal(int input)
-{
-	int decimal = 0;
-	int base = 1;
 
-	int temp = input;
-	while (temp) {
-		int last_digit = temp % 10;
-		temp = temp / 10;
-
-		decimal += last_digit * base;
-
-		base = base * 2;
-	}
-
-	return std::to_string(decimal);
 }
