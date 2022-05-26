@@ -31,7 +31,7 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(30, 30), wxSiz
 
 	//button labels
 	btns[0]->SetLabel("C");	btns[0]->SetId(100);
-	btns[1]->SetLabel("+/-");	btns[1]->SetId(101);  //have to figure out how to toggle
+	btns[1]->SetLabel("+/-");	btns[1]->SetId(101);  
 	btns[2]->SetLabel("%");	btns[2]->SetId(102);
 	btns[3]->SetLabel("/");	btns[3]->SetId(103);
 	btns[4]->SetLabel("7");	btns[4]->SetId(104);
@@ -75,7 +75,7 @@ wxString begin, end, result, txt;
 float first = 0.0f, last = 0.0f;
 int ops = 0;
 float numResult;
-int hex = 0;
+int num = 0;
 CalculatorProcessor* calcProc = CalculatorProcessor::GetInstance();
 
 void cMain::OnButtonClicked(wxCommandEvent& evt) {
@@ -84,10 +84,8 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	switch (evt.GetId() - 100) {
 	case 0:
 		DisplayWin->Clear();
-		//evt.Skip();
 		break;
 	case 1:
-		//DisplayWin->AppendText("-/+");
 		txt = DisplayWin->GetValue();
 		if (txt.Contains("-"))
 		{
@@ -97,10 +95,8 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->SetValue("-" + txt);
 		}
-		//evt.Skip();
 		break;
 	case 2:
-		//DisplayWin->AppendText("%");
 		begin = DisplayWin->GetValue();
 		first = wxAtof(begin);
 		ops = 2; //%
@@ -108,12 +104,10 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		evt.Skip();
 		break;
 	case 3:
-		//DisplayWin->AppendText("/");
 		begin = DisplayWin->GetValue();
 		first = wxAtoi(begin);
 		ops = 3; // /
 		DisplayWin->SetValue("0");
-		//evt.Skip();
 		break;
 	case 4:
 		if (DisplayWin->GetValue() == "0")
@@ -124,7 +118,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("7");
 		}
-		//evt.Skip();
 		break;
 	case 5:
 		if (DisplayWin->GetValue() == "0")
@@ -135,8 +128,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("8");
 		}
-	
-		//evt.Skip();
 		break;
 	case 6:
 		if (DisplayWin->GetValue() == "0")
@@ -147,15 +138,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("9");
 		}
-		//evt.Skip();
 		break;
 	case 7:
-		//DisplayWin->AppendText("*");
 		begin = DisplayWin->GetValue();
 		first = wxAtof(begin);
 		ops = 4; // *
 		DisplayWin->SetValue("0");
-		//evt.Skip();
 		break;
 	case 8:
 		if (DisplayWin->GetValue() == "0")
@@ -166,7 +154,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("4");
 		}
-		//evt.Skip();
 		break;
 	case 9:
 		if (DisplayWin->GetValue() == "0")
@@ -177,7 +164,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("5");
 		}
-		//evt.Skip();
 		break;
 	case 10:
 		if (DisplayWin->GetValue() == "0")
@@ -188,15 +174,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("6");
 		}
-		//evt.Skip();
 		break;
 	case 11:
-		//DisplayWin->AppendText("-");
 		begin = DisplayWin->GetValue();
 		first = wxAtof(begin);
 		ops = 5; // -
 		DisplayWin->SetValue("0");
-		//evt.Skip();
 		break;
 	case 12:
 		if (DisplayWin->GetValue() == "0")
@@ -207,7 +190,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("1");
 		}
-		//evt.Skip();
 		break;
 	case 13:
 		if (DisplayWin->GetValue() == "0")
@@ -218,8 +200,6 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("2");
 		}
-		//evt.Skip();
-
 		break;
 	case 14:
 		if (DisplayWin->GetValue() == "0")
@@ -230,15 +210,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("3");
 		}
-		//evt.Skip();
 		break;
 	case 15:
-		//DisplayWin->AppendText("+");
 		begin = DisplayWin->GetValue();
 		first = wxAtof(begin);
 		ops = 6; // +
 		DisplayWin->SetValue("0");
-		//evt.Skip();
 		break;
 	case 16:
 		if (DisplayWin->GetValue() == "0")
@@ -249,24 +226,35 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 			DisplayWin->AppendText("0");
 		}
-		//evt.Skip();
 		break;
 	case 17:
-		//DisplayWin->AppendText(".");
 		txt = DisplayWin->GetValue();
 		if (!txt.Contains("."))
 		{
 			DisplayWin->AppendText(".");
 		}
-		//evt.Skip();
 		break;
 	case 18:
 		txt = DisplayWin->GetValue();
-		hex = wxAtoi(txt);
-		txt = wxString::Format(wxT("%02x"), hex);
+		num = wxAtoi(txt);
+		txt = wxString::Format(wxT("%02x"), num);
 		DisplayWin->SetLabel(txt);
+		break;
+		
 
 	case 19:
+		txt = DisplayWin->GetValue();
+		num = wxAtoi(txt);
+		txt = calcProc->decimalToBin(num);
+		DisplayWin->SetLabel(txt);
+		break;
+		
+	case 20:
+		txt = DisplayWin->GetValue();
+		num = wxAtoi(txt);
+		txt = calcProc->decimal(num);
+		DisplayWin->SetLabel(txt);
+		break;
 		
 
 	case 21:
