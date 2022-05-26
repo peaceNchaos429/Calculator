@@ -11,14 +11,14 @@ class wxString;
 
 
 
-class CalculatorProcessor 
+class CalculatorProcessor
 {
 private:
 	CalculatorProcessor();
 	static CalculatorProcessor* calculatorProc;
 
-	
-	
+
+
 public:
 	std::vector<IBaseCommands*> commands;
 	MultiC* multiply;
@@ -32,7 +32,7 @@ public:
 		delete add;
 		delete subtract;
 		delete divide;
-		
+
 	}
 	CalculatorProcessor& operator=(const CalculatorProcessor& _other) = delete;
 	CalculatorProcessor(const CalculatorProcessor& _other) = delete;
@@ -44,12 +44,13 @@ public:
 		}
 		return calculatorProc;
 	}
-	
-	
-	
+
+
+
 	int ModC(int num1, int num2);
 	std::string decimal(int num);
 	std::string decimalToBin(int num);
+
 
 };
 

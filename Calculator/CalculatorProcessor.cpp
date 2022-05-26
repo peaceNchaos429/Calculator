@@ -51,4 +51,3 @@ std::string CalculatorProcessor::decimalToBin(int num)
 	return "0";
 }
 
-}
