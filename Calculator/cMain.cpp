@@ -75,6 +75,7 @@ wxString begin, end, result, txt;
 float first = 0.0f, last = 0.0f;
 int ops = 0;
 float numResult;
+int hex = 0;
 CalculatorProcessor* calcProc = CalculatorProcessor::GetInstance();
 
 void cMain::OnButtonClicked(wxCommandEvent& evt) {
@@ -101,7 +102,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	case 2:
 		//DisplayWin->AppendText("%");
 		begin = DisplayWin->GetValue();
-		first = wxAtoi(begin);
+		first = wxAtof(begin);
 		ops = 2; //%
 		DisplayWin->SetValue("0");
 		evt.Skip();
@@ -151,7 +152,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	case 7:
 		//DisplayWin->AppendText("*");
 		begin = DisplayWin->GetValue();
-		first = wxAtoi(begin);
+		first = wxAtof(begin);
 		ops = 4; // *
 		DisplayWin->SetValue("0");
 		//evt.Skip();
@@ -192,7 +193,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	case 11:
 		//DisplayWin->AppendText("-");
 		begin = DisplayWin->GetValue();
-		first = wxAtoi(begin);
+		first = wxAtof(begin);
 		ops = 5; // -
 		DisplayWin->SetValue("0");
 		//evt.Skip();
@@ -234,7 +235,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	case 15:
 		//DisplayWin->AppendText("+");
 		begin = DisplayWin->GetValue();
-		first = wxAtoi(begin);
+		first = wxAtof(begin);
 		ops = 6; // +
 		DisplayWin->SetValue("0");
 		//evt.Skip();
@@ -259,6 +260,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		}
 		//evt.Skip();
 		break;
+	case 18:
+		txt = DisplayWin->GetValue();
+		hex = wxAtoi(txt);
+		txt = wxString::Format(wxT("%02x"), hex);
+		DisplayWin->SetLabel(txt);
+
 	case 19:
 		
 
@@ -269,19 +276,19 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 		{
 		case 2:
 			end = DisplayWin->GetValue();
-			last = wxAtoi(end);
+			last = wxAtof(end);
 			numResult = calcProc->ModC(first, last);
 		case 3:
 			end = DisplayWin->GetValue();
 			
-			last = wxAtoi(end);
+			last = wxAtof(end);
 			numResult = calcProc->commands[3]->execute(first, last);
 			result = wxString::Format(wxT("%g"), numResult);
 			DisplayWin->SetValue(result);
 			break;
 		case 4:
 			end = DisplayWin->GetValue();
-			last = wxAtoi(end);
+			last = wxAtof(end);
 			numResult = calcProc->commands[0]->execute(first, last);
 			result = wxString::Format(wxT("%g"), numResult);
 			DisplayWin->SetValue(result);
@@ -289,14 +296,14 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 			break;
 		case 5:
 			end = DisplayWin->GetValue();
-			last = wxAtoi(end);
+			last = wxAtof(end);
 			numResult = calcProc->commands[2]->execute(first, last);
 			result = wxString::Format(wxT("%g"), numResult);
 			DisplayWin->SetValue(result);
 			break;
 		case 6:
 			end = DisplayWin->GetValue();
-			last = wxAtoi(end);
+			last = wxAtof(end);
 			numResult = calcProc->commands[1]->execute(first, last);
 			result = wxString::Format(wxT("%g"), numResult);
 			DisplayWin->SetValue(result);
