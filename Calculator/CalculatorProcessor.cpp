@@ -50,4 +50,11 @@ std::string CalculatorProcessor::decimalToBin(int num)
 
 	return "0";
 }
+std::string CalculatorProcessor::Hex(int num)
+{
+	std::ostringstream x;
+	x << std::hex << num;
+	std::string res = x.str();
+	return res;
+}
 

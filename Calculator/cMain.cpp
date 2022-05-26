@@ -237,7 +237,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt) {
 	case 18:
 		txt = DisplayWin->GetValue();
 		num = wxAtoi(txt);
-		txt = wxString::Format(wxT("%02x"), num);
+		txt = calcProc->Hex(num);
 		DisplayWin->SetLabel(txt);
 		break;
 		
