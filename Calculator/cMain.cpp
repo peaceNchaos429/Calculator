@@ -9,7 +9,7 @@ wxEND_EVENT_TABLE()
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(30, 30), wxSize(300, 500))
 {
-	CalculatorProcessor* calcProc = CalculatorProcessor::GetInstance();
+	
 
 	wxButton** btns;
 	BtnFactory factory;
@@ -71,83 +71,238 @@ cMain::~cMain()
 	delete[]btns;
 }
 
+wxString begin, end, result, txt;
+float first = 0.0f, last = 0.0f;
+int ops = 0;
+float numResult;
+CalculatorProcessor* calcProc = CalculatorProcessor::GetInstance();
+
 void cMain::OnButtonClicked(wxCommandEvent& evt) {
+	
+	
 	switch (evt.GetId() - 100) {
 	case 0:
 		DisplayWin->Clear();
-		evt.Skip();
+		//evt.Skip();
 		break;
 	case 1:
-		DisplayWin->AppendText("-");
-		evt.Skip();
+		//DisplayWin->AppendText("-/+");
+		txt = DisplayWin->GetValue();
+		if (txt.Contains("-"))
+		{
+			DisplayWin->Remove(0, 1);
+		}
+		else
+		{
+			DisplayWin->SetValue("-" + txt);
+		}
+		//evt.Skip();
 		break;
 	case 2:
-		DisplayWin->AppendText("%");
+		//DisplayWin->AppendText("%");
+		begin = DisplayWin->GetValue();
+		first = wxAtoi(begin);
+		ops = 2; //%
+		DisplayWin->SetValue("0");
 		evt.Skip();
 		break;
 	case 3:
-		DisplayWin->AppendText("/");
-		evt.Skip();
+		//DisplayWin->AppendText("/");
+		begin = DisplayWin->GetValue();
+		first = wxAtoi(begin);
+		ops = 3; // /
+		DisplayWin->SetValue("0");
+		//evt.Skip();
 		break;
 	case 4:
-		DisplayWin->AppendText("7");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("7");
+		}
+		else
+		{
+			DisplayWin->AppendText("7");
+		}
+		//evt.Skip();
 		break;
 	case 5:
-		DisplayWin->AppendText("8");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("8");
+		}
+		else
+		{
+			DisplayWin->AppendText("8");
+		}
+	
+		//evt.Skip();
 		break;
 	case 6:
-		DisplayWin->AppendText("9");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("9");
+		}
+		else
+		{
+			DisplayWin->AppendText("9");
+		}
+		//evt.Skip();
 		break;
 	case 7:
-		DisplayWin->AppendText("*");
-		evt.Skip();
+		//DisplayWin->AppendText("*");
+		begin = DisplayWin->GetValue();
+		first = wxAtoi(begin);
+		ops = 4; // *
+		DisplayWin->SetValue("0");
+		//evt.Skip();
 		break;
 	case 8:
-		DisplayWin->AppendText("4");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("4");
+		}
+		else
+		{
+			DisplayWin->AppendText("4");
+		}
+		//evt.Skip();
 		break;
 	case 9:
-		DisplayWin->AppendText("5");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("5");
+		}
+		else
+		{
+			DisplayWin->AppendText("5");
+		}
+		//evt.Skip();
 		break;
 	case 10:
-		DisplayWin->AppendText("6");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("6");
+		}
+		else
+		{
+			DisplayWin->AppendText("6");
+		}
+		//evt.Skip();
 		break;
 	case 11:
-		DisplayWin->AppendText("-");
-		evt.Skip();
+		//DisplayWin->AppendText("-");
+		begin = DisplayWin->GetValue();
+		first = wxAtoi(begin);
+		ops = 5; // -
+		DisplayWin->SetValue("0");
+		//evt.Skip();
 		break;
 	case 12:
-		DisplayWin->AppendText("1");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("1");
+		}
+		else
+		{
+			DisplayWin->AppendText("1");
+		}
+		//evt.Skip();
 		break;
 	case 13:
-		DisplayWin->AppendText("2");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("2");
+		}
+		else
+		{
+			DisplayWin->AppendText("2");
+		}
+		//evt.Skip();
 
 		break;
 	case 14:
-		DisplayWin->AppendText("3");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("3");
+		}
+		else
+		{
+			DisplayWin->AppendText("3");
+		}
+		//evt.Skip();
 		break;
 	case 15:
-		DisplayWin->AppendText("+");
-		evt.Skip();
+		//DisplayWin->AppendText("+");
+		begin = DisplayWin->GetValue();
+		first = wxAtoi(begin);
+		ops = 6; // +
+		DisplayWin->SetValue("0");
+		//evt.Skip();
 		break;
 	case 16:
-		DisplayWin->AppendText("0");
-		evt.Skip();
+		if (DisplayWin->GetValue() == "0")
+		{
+			DisplayWin->SetValue("0");
+		}
+		else
+		{
+			DisplayWin->AppendText("0");
+		}
+		//evt.Skip();
 		break;
 	case 17:
-		DisplayWin->AppendText(".");
-		evt.Skip();
+		//DisplayWin->AppendText(".");
+		txt = DisplayWin->GetValue();
+		if (!txt.Contains("."))
+		{
+			DisplayWin->AppendText(".");
+		}
+		//evt.Skip();
 		break;
+	case 19:
+		
+
 	case 21:
-		DisplayWin->AppendText("=");
+		//equal button
+		
+		switch (ops)
+		{
+		case 2:
+			end = DisplayWin->GetValue();
+			last = wxAtoi(end);
+			numResult = calcProc->ModC(first, last);
+		case 3:
+			end = DisplayWin->GetValue();
+			
+			last = wxAtoi(end);
+			numResult = calcProc->commands[3]->execute(first, last);
+			result = wxString::Format(wxT("%g"), numResult);
+			DisplayWin->SetValue(result);
+			break;
+		case 4:
+			end = DisplayWin->GetValue();
+			last = wxAtoi(end);
+			numResult = calcProc->commands[0]->execute(first, last);
+			result = wxString::Format(wxT("%g"), numResult);
+			DisplayWin->SetValue(result);
+
+			break;
+		case 5:
+			end = DisplayWin->GetValue();
+			last = wxAtoi(end);
+			numResult = calcProc->commands[2]->execute(first, last);
+			result = wxString::Format(wxT("%g"), numResult);
+			DisplayWin->SetValue(result);
+			break;
+		case 6:
+			end = DisplayWin->GetValue();
+			last = wxAtoi(end);
+			numResult = calcProc->commands[1]->execute(first, last);
+			result = wxString::Format(wxT("%g"), numResult);
+			DisplayWin->SetValue(result);
+			break;
+		}
+		
 		evt.Skip();
 		break;
 	}

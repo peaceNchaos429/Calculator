@@ -2,6 +2,7 @@
 #include "wx/wx.h"
 #include "BtnFactory.h"
 #include "CalculatorProcessor.h"
+#include "IBaseCommands.h"
 
 class cMain : public wxFrame
 {

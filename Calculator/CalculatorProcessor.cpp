@@ -19,19 +19,21 @@ CalculatorProcessor::CalculatorProcessor()
 	commands.push_back(divide);
 }
 
+
+
 CalculatorProcessor* CalculatorProcessor::calculatorProc = nullptr;
 int CalculatorProcessor::ModC(int num1, int num2)
 {
 	return num1 % num2;
 }
-float CalculatorProcessor::PerformExe(wxString numbers, float num1, float num2)
-{
-	float answer;
-	if (numbers.Contains("*"))
-	{
-		answer = commands[0]->execute(num1, num2);
-	}
-	else if (numbers.Contains("-"))
+//float CalculatorProcessor::PerformExe(wxTextCtrl* window, float num1, float num2)
+//{
+//	float answer;
+//	if (window->GetLabel() == "*")
+//	{
+//		answer = commands[0]->execute(num1, num2);
+//	}
+	/*else if (numbers.Contains("-"))
 	{
 		answer = commands[1]->execute(num1, num2);
 	}
@@ -46,6 +48,6 @@ float CalculatorProcessor::PerformExe(wxString numbers, float num1, float num2)
 	else if (numbers.Contains("%"))
 	{
 		answer = ModC(round(num1), round(num2));
-	}
-	return answer;
-}
+	}*/
+	//return answer;
+//}

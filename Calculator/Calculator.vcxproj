@@ -27,6 +27,7 @@
     <ClInclude Include="DivideC.h" />
     <ClInclude Include="IBaseCommands.h" />
     <ClInclude Include="MultiC.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SubtractC.h" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,9 @@
     <ClCompile Include="IBaseCommands.cpp" />
     <ClCompile Include="MultiC.cpp" />
     <ClCompile Include="SubtractC.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Calculator.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

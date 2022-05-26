@@ -11,22 +11,28 @@ class wxString;
 
 
 
-class CalculatorProcessor
+class CalculatorProcessor 
 {
 private:
 	CalculatorProcessor();
 	static CalculatorProcessor* calculatorProc;
 
+	
+	
+public:
 	std::vector<IBaseCommands*> commands;
 	MultiC* multiply;
 	SubtractC* subtract;
 	AddC* add;
 	DivideC* divide;
-	
-public:
 	~CalculatorProcessor()
 	{
 		delete[] calculatorProc;
+		delete multiply;
+		delete add;
+		delete subtract;
+		delete divide;
+		
 	}
 	CalculatorProcessor& operator=(const CalculatorProcessor& _other) = delete;
 	CalculatorProcessor(const CalculatorProcessor& _other) = delete;
@@ -42,7 +48,7 @@ public:
 	
 	
 	int ModC(int num1, int num2);
-	float PerformExe(wxString numbers, float num1, float num2);
+	//float PerformExe(wxTextCtrl* window, float num1, float num2);
 
 };
 
